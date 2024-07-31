@@ -1,0 +1,20 @@
+#principal-index h1 p {
+    color: #343A40;
+}
+
+#principal-index p {
+    font-weight: 400;
+}
+
+hr {
+    border: 1px solid #7a7a7a;
+    border-radius: 1px;
+    margin-left: 50px;
+    margin-right: 40px;
+}
+
+.custom-btn {
+    border-radius: 20px;
+    background-color: #141414;
+    font-weight: 500;
+}
