@@ -66,13 +66,29 @@ hr {
     z-index: 1;
 }
 
-#tienda .product-card {
-    margin: 0.4rem 0;
-}
+#tienda {
+    .checked {
+        color: orange;
+    }
 
-#tienda .card-body {
-    -ms-flex: 1 1 auto;
-    flex: 1 1 auto;
-    min-height: 5px;
-    padding: 1.25rem
+    .card {
+        max-width: 300px;
+        margin: auto;
+    }
+
+    .card img.card-img-top {
+        height: 200px;
+        object-fit: contain;
+        padding: 10px;
+    }
+
+    .product-card {
+        margin: 0.4rem 0;
+    }
+
+    .card-body h5 {
+        color: #223263;
+        font-weight: 1000 !important;
+    }
+
 }
