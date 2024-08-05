@@ -47,6 +47,7 @@
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                             <a class="dropdown-item" href="login.html">Login</a>
                             <a class="dropdown-item" href="registro.html">Register</a>
+                            <a class="dropdown-item" href="usuarios.html">Usuarios</a>
                         </div>
                     </li>
                 </ul>
@@ -54,6 +55,11 @@
             </div>
         </div>
     </nav>
+
+    <div id="weather" class="hidden toggle-weather">
+        <h5>Clima local</h5>
+        <div id="weather-data">Obteniendo datos del clima...</div>
+    </div>
 
     <div id="shoeCarousel" class="carousel slide" data-ride="carousel">
         <div class="carousel-inner">
@@ -159,7 +165,8 @@
             <div class="col col-sm-12">
                 <h1 class="font-weight-bold text-center display-3">NEW THIS WEEK</h1>
                 <div class="text-center">
-                    <button type="button" class="custom-btn btn btn-dark">Shop New Arrivals</button>
+                    <a href="tienda.html" type="button" class="custom-btn btn btn-dark" href="tienda.html">Shop
+                        New Arrivals</a>
                 </div>
             </div>
         </div>
@@ -168,19 +175,72 @@
             <div class="col-lg-6 text-right">
                 <img src="https://static.nike.com/a/images/f_auto/dpr_3.0,cs_srgb/h_500,c_limit/64265cce-0cfc-4309-aa45-33835124eeaa/el-mejor-calzado-nike-de-estilo-high-que-ya-puedes-comprar-art%C3%ADculo-de-ogc.jpg"
                     data-mdb-img="https://mdbcdn.b-cdn.net/img/Photos/Vertical/1.webp" alt="Dark Roast Iced Coffee"
-                    class="w-75 shadow-1-strong rounded-lg" />
+                    class="w-75 shadow-1-strong rounded-lg animacion_hover img-fluid" />
             </div>
 
             <div class="col-lg-6 text-left">
                 <img src="https://ca-times.brightspotcdn.com/dims4/default/15a30ea/2147483647/strip/true/crop/6122x4081+0+1/resize/1440x960!/quality/75/?url=https%3A%2F%2Fcalifornia-times-brightspot.s3.amazonaws.com%2Fb3%2F10%2F10c245034893adf233fc1cf3071a%2F1351750-fi-sneaker-buyer-coolkicks-jlc-16185-021.jpg"
                     data-mdb-img="https://mdbcdn.b-cdn.net/img/Photos/Slides/1.webp" alt="Table Full of Spices"
-                    class="w-75 mb-2 mb-md-4 shadow-1-strong rounded" />
+                    class="w-75 mb-2 mb-md-4 shadow-1-strong rounded animacion_hover img-fluid" />
                 <img src="https://admin.digitalsport.com.ar/files/uploads/DIO%20AGOSTO%2021/Jordan%201%20Retro%20AJKO%20Chicago%20.jpg"
                     data-mdb-img="https://mdbcdn.b-cdn.net/img/Photos/Square/1.webp" alt="Coconut with Strawberries"
-                    class="w-75 shadow-1-strong rounded" />
+                    class="w-75 shadow-1-strong rounded animacion_hover img-fluid" />
             </div>
         </div>
 
+    </div>
+
+    <div id="acordeon" class="container py-4">
+        <div class="row py-3">
+            <div class="col col-sm-12">
+                <h2 class="font-weight-bold text-center display-3">Más información</h2>
+            </div>
+        </div>
+        <button class="accordion">Preguntas frecuentes</button>
+        <div class="panel">
+            <div>
+                <h5>¿Cuál es el tiempo de envío?</h5>
+                <p>El tiempo de envío varía entre 3 a 7 días hábiles dependiendo de tu ubicación.</p>
+            </div>
+            <div>
+                <h5>¿Puedo devolver un producto?</h5>
+                <p>Sí, ofrecemos devoluciones dentro de los 30 días posteriores a la compra. Asegúrate de que el
+                    producto esté en su estado original.</p>
+            </div>
+            <div>
+                <h5>¿Ofrecen garantía en los productos?</h5>
+                <p>Todos nuestros productos vienen con una garantía de 1 año contra defectos de fabricación.</p>
+            </div>
+
+        </div>
+
+        <button class="accordion">Ofertas y descuentos</button>
+        <div class="panel">
+            <p>Actualmente tenemos las siguientes ofertas:</p>
+            <ul>
+                <li><strong>Descuento del 10%:</strong> Usa el código <strong>SUMMER10</strong> al finalizar la compra.
+                </li>
+                <li><strong>Envío gratuito:</strong> En pedidos superiores a $100.</li>
+            </ul>
+            <p>Para más información sobre nuestras promociones, consulta nuestra sección de ofertas en la tienda.</p>
+        </div>
+
+        <button class="accordion">Compromiso y sostenibilidad</button>
+        <div class="panel">
+            <h4>Compromiso con la Sostenibilidad</h4>
+            <p>En nuestra tienda, estamos dedicados a reducir nuestro impacto ambiental y promover prácticas
+                sostenibles. Aquí te contamos cómo lo estamos logrando:</p>
+            <ul>
+                <li><strong>Productos Ecológicos:</strong> Ofrecemos una selección de calzado fabricado con materiales
+                    reciclados y sostenibles.</li>
+                <li><strong>Empaque Sostenible:</strong> Utilizamos empaques reciclables y minimizamos el uso de
+                    plásticos.</li>
+                <li><strong>Donaciones y Reciclaje:</strong> Trabajamos con organizaciones para donar calzado usado y
+                    reciclamos productos fuera de uso.</li>
+            </ul>
+            <p>Queremos que cada compra que realices no solo te beneficie a ti, sino también al planeta. Gracias por
+                apoyar nuestras iniciativas de sostenibilidad.</p>
+        </div>
     </div>
 
     <!-- FOOTER -->
@@ -220,6 +280,8 @@
     <script src="https://unpkg.com/@popperjs/core@2"></script>
     <script src="js/jquery-3.7.1.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
+    <script src="js/acordeon.js"></script>
+    <script src="js/scripts.js"></script>
 </body>
 
 </html>
