@@ -138,7 +138,7 @@ function createCard(item) {
         : '<span class="fa fa-star"></span>';
   }
   return `
-    <div class="col-12 col-md-4 mb-4">
+    <div class="col-12 col-md-4 mb-4 fade-in">
       <div class="card" style="height: 100%;">
         <img src="${item.thumbnail}" class="card-img-top img-fluid" alt="${
     item.title
@@ -160,3 +160,16 @@ function createCard(item) {
       </div>
     </div>`;
 }
+
+$(document).ready(function () {
+  // Agregar la clase visible para los elementos con la clase fade-in
+  $(".fade-in").each(function (i) {
+    var element = $(this);
+    setTimeout(function () {
+      element.addClass("visible");
+    }, 200 * i); // Retraso escalonado para cada elemento
+  });
+
+  // Agregar la clase visible para la barra lateral
+  $(".slide-in").addClass("visible");
+});
