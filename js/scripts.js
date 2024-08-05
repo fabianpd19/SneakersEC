@@ -54,7 +54,14 @@ $(document).ready(function () {
 });
 
 $(document).ready(function () {
-  $("#floatingButton").click(function () {
-    $("#myModal").modal("toggle");
+  // Agregar la clase visible para los elementos con la clase fade-in
+  $(".fade-in").each(function (i) {
+    var element = $(this);
+    setTimeout(function () {
+      element.addClass("visible");
+    }, 200 * i); // Retraso escalonado para cada elemento
   });
+
+  // Agregar la clase visible para la barra lateral
+  $(".slide-in").addClass("visible");
 });

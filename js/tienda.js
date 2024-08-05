@@ -138,7 +138,7 @@ function createCard(item) {
         : '<span class="fa fa-star"></span>';
   }
   return `
-    <div class="col-12 col-md-4 mb-4 fade-in">
+    <div class="col-12 col-md-4 mb-4">
       <div class="card" style="height: 100%;">
         <img src="${item.thumbnail}" class="card-img-top img-fluid" alt="${
     item.title
