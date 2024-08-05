@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SneakersEC</title>
+    <link rel="stylesheet" href="css/bootstrap-grid.css">
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="shortcut icon" href="img/favicon/image.png" type="image/x-icon">
+    <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'>
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+    <nav class="navbar navbar-expand-sm navbar-light">
+        <div class="container">
+            <img src="img/logo.png" alt="" width="100px">
+            <button class="navbar-toggler d-lg-none" type="button" data-toggle="collapse"
+                data-target="#collapsibleNavId" aria-controls="collapsibleNavId" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="collapsibleNavId">
+                <ul class="navbar-nav mr-auto mx-2 mt-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="tienda.html">Shop</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="soporte.html">Contact</a>
+                    </li>
+                </ul>
+                <ul class="navbar-nav my-2 my-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link" href="carrito.html"><i class="fa-solid fa-cart-shopping"></i></a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link " href="" id="navbarDropdown" role="button" data-toggle="dropdown"
+                            aria-haspopup="true" aria-expanded="false">
+                            <i class="fa-solid fa-user"></i>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="login.html">Login</a>
+                            <a class="dropdown-item" href="registro.html">Register</a>
+                            <a class="dropdown-item" href="usuarios.html">Usuarios</a>
+                        </div>
+                    </li>
+                </ul>
+
+            </div>
+        </div>
+    </nav>
+
+    <div id="user-profile" class="container py-4 fade-in">
+        <div class="row">
+            <div class="col-lg-4">
+                <div class="profile-card-4 z-depth-3">
+                    <div class="card">
+                        <div class="card-body text-center bg-dark rounded-top">
+                            <div class="user-box">
+                                <img id="user-avatar" src="https://bootdey.com/img/Content/avatar/avatar7.png"
+                                    alt="user avatar">
+                            </div>
+                            <h5 id="user-name" class="mb-1 text-white"></h5>
+                            <h6 id="user-title" class="text-light">Sneaker Enthusiast</h6>
+                        </div>
+                        <div class="card-body">
+                            <ul class="list-group shadow-none">
+                                <li class="list-group-item">
+                                    <div class="list-icon">
+                                        <i class="fa fa-phone-square"></i>
+                                    </div>
+                                    <div class="list-details">
+                                        <span id="user-phone">9910XXXXXX</span>
+                                        <small>Mobile Number</small>
+                                    </div>
+                                </li>
+                                <li class="list-group-item">
+                                    <div class="list-icon">
+                                        <i class="fa fa-envelope"></i>
+                                    </div>
+                                    <div class="list-details">
+                                        <span id="user-email">info@example.com</span>
+                                        <small>Email Address</small>
+                                    </div>
+                                </li>
+                                <li class="list-group-item">
+                                    <div class="list-icon">
+                                        <i class="fa fa-globe"></i>
+                                    </div>
+                                    <div class="list-details">
+                                        <span id="user-website">www.example.com</span>
+                                        <small>Address</small>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-8">
+                <div class="card z-depth-3">
+                    <div class="card-body">
+                        <ul class="nav nav-pills nav-pills-primary nav-justified">
+                            <li class="nav-item">
+                                <a href="javascript:void();" data-target="#profile" data-toggle="pill"
+                                    class="nav-link active show"><i class="icon-user"></i> <span
+                                        class="hidden-xs">Profile</span></a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="javascript:void();" data-target="#orders" data-toggle="pill"
+                                    class="nav-link"><i class="icon-envelope-open"></i> <span
+                                        class="hidden-xs">Orders</span></a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="javascript:void();" data-target="#edit" data-toggle="pill" class="nav-link"><i
+                                        class="icon-note"></i> <span class="hidden-xs">Edit</span></a>
+                            </li>
+                        </ul>
+                        <div class="tab-content p-3">
+                            <div class="tab-pane active show" id="profile">
+                                <h5 class="mb-3">User Profile</h5>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <h6>About</h6>
+                                        <p>
+                                            Sneaker Enthusiast and Collector.
+                                        </p>
+                                        <h6>Hobbies</h6>
+                                        <p>
+                                            Sneaker collecting, streetwear fashion, and basketball.
+                                        </p>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <h6>Recent badges</h6>
+                                        <a href="javascript:void();" class="badge badge-dark badge-pill">nike</a>
+                                        <a href="javascript:void();" class="badge badge-dark badge-pill">adidas</a>
+                                        <a href="javascript:void();" class="badge badge-dark badge-pill">jordan</a>
+                                        <a href="javascript:void();" class="badge badge-dark badge-pill">yeezy</a>
+                                        <a href="javascript:void();" class="badge badge-dark badge-pill">new balance</a>
+                                        <hr>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <h5 class="mt-2 mb-3"><span class="fa fa-clock-o ion-clock float-right"></span>
+                                            Recent Activity</h5>
+                                        <table class="table table-hover table-striped">
+                                            <tbody>
+                                                <tr>
+                                                    <td>
+                                                        <strong>Abby</strong> bought Air Jordan 1 in
+                                                        <strong>Just now</strong>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <strong>John</strong> reviewed Nike Dunk Low in
+                                                        <strong>10 minutes ago</strong>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <strong>Sarah</strong> added Yeezy Boost 350 V2 to wishlist in
+                                                        <strong>30 minutes ago</strong>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <strong>Michael</strong> followed your shop in
+                                                        <strong>1 hour ago</strong>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <strong>Emma</strong> commented on your review of Adidas
+                                                        Ultraboost in
+                                                        <strong>2 hours ago</strong>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                <!--/row-->
+                            </div>
+                            <div class="tab-pane" id="orders">
+                                <h5 class="mb-3">Recent Orders</h5>
+                                <div class="table-responsive">
+                                    <table class="table table-hover table-striped">
+                                        <thead>
+                                            <tr>
+                                                <th>Order ID</th>
+                                                <th>Date</th>
+                                                <th>Status</th>
+                                                <th>Total</th>
+                                                <th>Actions</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>#12345</td>
+                                                <td>Jan 15, 2023</td>
+                                                <td><span class="badge badge-success">Delivered</span></td>
+                                                <td>$150.00</td>
+                                                <td>
+                                                    <button class="btn btn-secondary btn-sm">View</button>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>#12346</td>
+                                                <td>Feb 10, 2023</td>
+                                                <td><span class="badge badge-warning">Pending</span></td>
+                                                <td>$200.00</td>
+                                                <td>
+                                                    <button class="btn btn-secondary btn-sm">View</button>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>#12347</td>
+                                                <td>Mar 5, 2023</td>
+                                                <td><span class="badge badge-danger">Cancelled</span></td>
+                                                <td>$250.00</td>
+                                                <td>
+                                                    <button class="btn btn-secondary btn-sm">View</button>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="tab-pane" id="edit">
+                                <form>
+                                    <div class="form-group row">
+                                        <label class="col-lg-3 col-form-label form-control-label">Name</label>
+                                        <div class="col-lg-9">
+                                            <input class="form-control" type="text" value="John Doe">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label class="col-lg-3 col-form-label form-control-label">Email</label>
+                                        <div class="col-lg-9">
+                                            <input class="form-control" type="email" value="email@example.com">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label class="col-lg-3 col-form-label form-control-label">Phone</label>
+                                        <div class="col-lg-9">
+                                            <input class="form-control" type="text" value="123-456-7890">
+                                        </div>
+                                    </div>
+                                    <!-- <div class="form-group row">
+                                        <label class="col-lg-3 col-form-label form-control-label">Website</label>
+                                        <div class="col-lg-9">
+                                            <input class="form-control" type="url" value="http://example.com">
+                                        </div>
+                                    </div> -->
+                                    <div class="form-group row">
+                                        <label class="col-lg-3 col-form-label form-control-label">About</label>
+                                        <div class="col-lg-9">
+                                            <textarea class="form-control"
+                                                rows="3">Sneaker Enthusiast and Collector.</textarea>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <div class="col-lg-9 ml-auto text-right">
+                                            <input type="reset" class="btn btn-secondary" value="Cancel">
+                                            <input type="button" class="btn btn-dark" value="Save Changes">
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="bg-dark text-white pt-4 pb-4">
+        <div class="container">
+            <div class="row">
+                <!-- Información de la compañía -->
+                <div class="col-md-6 text-right">
+                    <img src="img/logo.png" alt="" class="img-fluid" width="40%">
+                    <p class="lead py-2" style="font-size: 15px;">Compra los mejores sneakers.</p>
+                </div>
+
+                <div class="col-md-6">
+                    <h4 class="text-white font-weight-bold">Página</h4>
+                    <ul class="list-unstyled">
+                        <li class="py-1"><a href="index.html" class="text-white">Home</a></li>
+                        <li class="py-1"><a href="tienda.html" class="text-white">Shop</a></li>
+                        <li class="py-1"><a href="soporte.html" class="text-white">Contact</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="text-center mt-3">
+                <p>&copy; 2024 Grupo 3. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://kit.fontawesome.com/91728c998d.js" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/@popperjs/core@2"></script>
+    <script src="js/jquery-3.7.1.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/tienda.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            fetch('https://randomuser.me/api/')
+                .then(response => response.json())
+                .then(data => {
+                    const user = data.results[0];
+                    $('#user-avatar').attr('src', user.picture.large);
+                    $('#user-name').text(`${user.name.first} ${user.name.last}`);
+                    $('#user-title').text('Sneaker Enthusiast');
+                    $('#user-phone').text(user.phone);
+                    $('#user-email').text(user.email);
+                    $('#user-website').text(user.location.country);
+                });
+        });
+    </script>
+</body>
+
+</html>
