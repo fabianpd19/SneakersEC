@@ -140,7 +140,9 @@ function createCard(item) {
   return `
     <div class="col-12 col-md-4 mb-4">
       <div class="card" style="height: 100%;">
-        <img src="${item.thumbnail}" class="card-img-top" alt="${item.title}">
+        <img src="${item.thumbnail}" class="card-img-top img-fluid" alt="${
+    item.title
+  }">
         <div class="card-body">
           <h5 class="card-title">${item.title}</h5>
           <div class="card-text">${stars}</div>
