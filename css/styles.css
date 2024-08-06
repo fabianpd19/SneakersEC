@@ -33,21 +33,65 @@ hr {
     flex: 1 0 auto;
 }
 
-.help-section {
+/* SOPORTE  */
+
+.help-section,
+.contact-section {
     padding: 50px 0;
-    opacity: 0;
+    display: none;
+    /* Ocultar inicialmente para la animación */
 }
 
 .contact-section {
     background-color: #f8f9fa;
-    padding: 50px 0;
-    opacity: 0;
 }
 
 .contact-methods {
     display: flex;
     justify-content: space-around;
 }
+
+.footer {
+    flex-shrink: 0;
+    text-align: center;
+    background-color: #343a40;
+    color: white;
+    padding: 1rem 0;
+}
+
+.footer .container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.footer .footer-logo {
+    margin-bottom: 0.5rem;
+}
+
+.footer .footer-nav {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    margin: 0;
+    margin-bottom: 0.5rem;
+}
+
+.footer .footer-nav li {
+    margin: 0 1rem;
+}
+
+.footer .footer-nav a {
+    color: white;
+    text-decoration: none;
+}
+
+.footer .footer-nav a:hover {
+    text-decoration: underline;
+}
+
+
 
 .content-register {
     background-image: url('../img/zapas.png') !important;
