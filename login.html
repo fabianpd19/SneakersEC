@@ -6,132 +6,55 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SneakersEC - Iniciar Sesión</title>
     <link rel="stylesheet" href="css/bootstrap.min.css">
-    <style>
-        body {
-            background-color: #f8f9fa;
-            background-image: url('img/zapas.png');
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            position: relative;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .content {
-            flex: 1 0 auto;
-        }
-
-        .login-container {
-            max-width: 400px;
-            width: 100%;
-            margin: 1rem auto;
-            padding: 1rem;
-            background: white;
-            border-radius: 0.5rem;
-            box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
-            position: relative;
-            z-index: 1;
-        }
-
-        .login-container h2 {
-            text-align: center;
-            font-size: 1.5rem;
-        }
-
-        .login-container h2 span {
-            display: block;
-        }
-
-        .footer {
-            flex-shrink: 0;
-            text-align: center;
-            background-color: #343a40;
-            color: white;
-            padding: 1rem 0;
-        }
-
-        .navbar-brand {
-            margin-right: 1rem;
-        }
-
-        .navbar-nav .nav-item .nav-link {
-            color: #000;
-        }
-
-        .navbar-nav .nav-item .nav-link:hover {
-            color: #007bff;
-        }
-
-        .footer .container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        .footer .footer-logo {
-            margin-bottom: 0.5rem;
-        }
-
-        .footer .footer-nav {
-            list-style: none;
-            padding: 0;
-            display: flex;
-            justify-content: center;
-            margin: 0;
-            margin-bottom: 0.5rem;
-        }
-
-        .footer .footer-nav li {
-            margin: 0 1rem;
-        }
-
-        .footer .footer-nav a {
-            color: white;
-            text-decoration: none;
-        }
-
-        .footer .footer-nav a:hover {
-            text-decoration: underline;
-        }
-    </style>
+    <link rel="stylesheet" href="css/styles.css">
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="#">
+
+    <!-- NAVBAR -->
+    <nav class="navbar navbar-expand-sm navbar-light bg-white">
+        <div class="container">
             <img src="img/logo.png" alt="" width="100px">
-        </a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
-            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Home</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Shop</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Contact</a>
-                </li>
-            </ul>
-            <ul class="navbar-nav ml-auto">
-                <li class="nav-item">
-                    <a class="nav-link" href="#"><i class="fa-solid fa-cart-shopping"></i></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#"><i class="fa-solid fa-user"></i></a>
-                </li>
-            </ul>
+            <button class="navbar-toggler d-lg-none" type="button" data-toggle="collapse"
+                data-target="#collapsibleNavId" aria-controls="collapsibleNavId" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="collapsibleNavId">
+                <ul class="navbar-nav mr-auto mx-2 mt-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="tienda.html">Shop</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="soporte.html">Contact</a>
+                    </li>
+                </ul>
+                <ul class="navbar-nav my-2 my-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link" href="carrito.html"><i class="fa-solid fa-cart-shopping"></i></a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link " href="" id="navbarDropdown" role="button" data-toggle="dropdown"
+                            aria-haspopup="true" aria-expanded="false">
+                            <i class="fa-solid fa-user"></i>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="login.html">Login</a>
+                            <a class="dropdown-item" href="registro.html">Register</a>
+                            <a class="dropdown-item" href="usuarios.html">Usuarios</a>
+                        </div>
+                    </li>
+                </ul>
+
+            </div>
         </div>
     </nav>
 
-    <div class="content d-flex align-items-center justify-content-center">
-        <div class="login-container">
+    <div class="content d-flex align-items-center justify-content-center content-register">
+        <div class="register-container">
             <h2><span>Iniciar Sesión</span><span>SneakerEC</span></h2>
             <button class="btn btn-outline-primary btn-block mb-3">Continuar con Google</button>
             <form action="index.html">
