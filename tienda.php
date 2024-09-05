@@ -22,14 +22,17 @@ $filterQuery = "";
 if (isset($_GET['categoria']) || isset($_GET['genero']) || isset($_GET['marca'])) {
     $filterConditions = [];
 
-    if (isset($_GET['categoria']) && $_GET['categoria'] !== '') {
-        $filterConditions[] = "productos.categoria_id = " . intval($_GET['categoria']);
+    if (isset($_GET['categoria']) && !empty($_GET['categoria'])) {
+        $categorias = implode(",", array_map('intval', $_GET['categoria']));
+        $filterConditions[] = "productos.categoria_id IN ($categorias)";
     }
-    if (isset($_GET['genero']) && $_GET['genero'] !== '') {
-        $filterConditions[] = "productos.genero_id = " . intval($_GET['genero']);
+    if (isset($_GET['genero']) && !empty($_GET['genero'])) {
+        $generos = implode(",", array_map('intval', $_GET['genero']));
+        $filterConditions[] = "productos.genero_id IN ($generos)";
     }
-    if (isset($_GET['marca']) && $_GET['marca'] !== '') {
-        $filterConditions[] = "productos.marca_id = " . intval($_GET['marca']);
+    if (isset($_GET['marca']) && !empty($_GET['marca'])) {
+        $marcas = implode(",", array_map('intval', $_GET['marca']));
+        $filterConditions[] = "productos.marca_id IN ($marcas)";
     }
 
     if (count($filterConditions) > 0) {
@@ -71,39 +74,43 @@ $productos = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 <div class="container-fluid container">
                     <!-- Formulario de filtros dinámicos -->
                     <form id="filters-form" class="py-1">
+
+                        <!-- Filtro de Categorías -->
                         <div class="form-group">
-                            <label for="categoria">Categoría</label>
-                            <select name="categoria" id="categoria" class="form-control">
-                                <option value="">Todas</option>
-                                <?php foreach ($categorias as $categoria): ?>
-                                    <option value="<?= htmlspecialchars($categoria['id']) ?>" <?= (isset($_GET['categoria']) && $_GET['categoria'] == $categoria['id']) ? 'selected' : '' ?>>
-                                        <?= htmlspecialchars($categoria['nombre']) ?>
-                                    </option>
-                                <?php endforeach; ?>
-                            </select>
+                            <h5 class="font-weight-bold">Categorías</h5>
+                            <?php foreach ($categorias as $categoria): ?>
+                                <div class="form-check">
+                                    <input type="checkbox" class="form-check-input" name="categoria[]" value="<?= htmlspecialchars($categoria['id']) ?>"
+                                        <?= (isset($_GET['categoria']) && in_array($categoria['id'], $_GET['categoria'])) ? 'checked' : '' ?>>
+                                    <label class="form-check-label"><?= htmlspecialchars($categoria['nombre']) ?></label>
+                                </div>
+                            <?php endforeach; ?>
                         </div>
+
+                        <!-- Filtro de Géneros -->
                         <div class="form-group">
-                            <label for="genero">Género</label>
-                            <select name="genero" id="genero" class="form-control">
-                                <option value="">Todos</option>
-                                <?php foreach ($generos as $genero): ?>
-                                    <option value="<?= htmlspecialchars($genero['id']) ?>" <?= (isset($_GET['genero']) && $_GET['genero'] == $genero['id']) ? 'selected' : '' ?>>
-                                        <?= htmlspecialchars($genero['nombre']) ?>
-                                    </option>
-                                <?php endforeach; ?>
-                            </select>
+                            <h5 class="font-weight-bold">Géneros</h5>
+                            <?php foreach ($generos as $genero): ?>
+                                <div class="form-check">
+                                    <input type="checkbox" class="form-check-input" name="genero[]" value="<?= htmlspecialchars($genero['id']) ?>"
+                                        <?= (isset($_GET['genero']) && in_array($genero['id'], $_GET['genero'])) ? 'checked' : '' ?>>
+                                    <label class="form-check-label"><?= htmlspecialchars($genero['nombre']) ?></label>
+                                </div>
+                            <?php endforeach; ?>
                         </div>
+
+                        <!-- Filtro de Marcas -->
                         <div class="form-group">
-                            <label for="marca">Marca</label>
-                            <select name="marca" id="marca" class="form-control">
-                                <option value="">Todas</option>
-                                <?php foreach ($marcas as $marca): ?>
-                                    <option value="<?= htmlspecialchars($marca['id']) ?>" <?= (isset($_GET['marca']) && $_GET['marca'] == $marca['id']) ? 'selected' : '' ?>>
-                                        <?= htmlspecialchars($marca['nombre']) ?>
-                                    </option>
-                                <?php endforeach; ?>
-                            </select>
+                            <h5 class="font-weight-bold">Marcas</h5>
+                            <?php foreach ($marcas as $marca): ?>
+                                <div class="form-check">
+                                    <input type="checkbox" class="form-check-input" name="marca[]" value="<?= htmlspecialchars($marca['id']) ?>"
+                                        <?= (isset($_GET['marca']) && in_array($marca['id'], $_GET['marca'])) ? 'checked' : '' ?>>
+                                    <label class="form-check-label"><?= htmlspecialchars($marca['nombre']) ?></label>
+                                </div>
+                            <?php endforeach; ?>
                         </div>
+
                     </form>
                 </div>
             </div>
@@ -151,18 +158,13 @@ $productos = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <!-- Script para manejar los filtros con AJAX -->
     <script>
         $(document).ready(function() {
-            $('#filters-form select').change(function() {
+            $('#filters-form input[type="checkbox"]').change(function() {
                 $.ajax({
                     url: 'tienda.php',
                     type: 'GET',
                     data: $('#filters-form').serialize(),
                     success: function(response) {
-                        // Actualizar el contenido con la respuesta del servidor
                         $('#display-items-div').html($(response).find('#display-items-div').html());
-                        // Mantener los filtros seleccionados
-                        $('#filters-form').find('select').each(function() {
-                            $(this).val($(response).find('select[name="' + $(this).attr('name') + '"]').val());
-                        });
                     }
                 });
             });
@@ -171,15 +173,13 @@ $productos = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
     <script>
         $(document).ready(function() {
-            // Agregar la clase visible para los elementos con la clase fade-in
             $(".fade-in").each(function(i) {
                 var element = $(this);
                 setTimeout(function() {
                     element.addClass("visible");
-                }, 200 * i); // Retraso escalonado para cada elemento
+                }, 200 * i);
             });
 
-            // Agregar la clase visible para la barra lateral
             $(".slide-in").addClass("visible");
         });
     </script>
