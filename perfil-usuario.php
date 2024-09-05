@@ -65,6 +65,7 @@ $sobre = htmlspecialchars($user['sobre'] ?? 'No disponible');
 $hobbies = htmlspecialchars($user['hobbies'] ?? 'No disponible');
 
 // Verificar si se ha enviado el formulario de edición
+$alertMessage = '';
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['save_changes'])) {
     // Obtener los datos del formulario
     $username = $_POST['username'];
