@@ -1,3 +1,53 @@
+<?php
+require_once 'backend/config/connection.php';
+
+// Obtener categorías
+$categoriaQuery = "SELECT id, nombre FROM categorias";
+$categoriaStmt = $pdo->query($categoriaQuery);
+$categorias = $categoriaStmt->fetchAll(PDO::FETCH_ASSOC);
+
+// Obtener géneros
+$generoQuery = "SELECT id, nombre FROM generos";
+$generoStmt = $pdo->query($generoQuery);
+$generos = $generoStmt->fetchAll(PDO::FETCH_ASSOC);
+
+// Obtener marcas
+$marcaQuery = "SELECT id, nombre FROM marcas";
+$marcaStmt = $pdo->query($marcaQuery);
+$marcas = $marcaStmt->fetchAll(PDO::FETCH_ASSOC);
+
+// Filtrado de productos
+$filterQuery = "";
+
+if (isset($_GET['categoria']) || isset($_GET['genero']) || isset($_GET['marca'])) {
+    $filterConditions = [];
+
+    if (isset($_GET['categoria']) && $_GET['categoria'] !== '') {
+        $filterConditions[] = "productos.categoria_id = " . intval($_GET['categoria']);
+    }
+    if (isset($_GET['genero']) && $_GET['genero'] !== '') {
+        $filterConditions[] = "productos.genero_id = " . intval($_GET['genero']);
+    }
+    if (isset($_GET['marca']) && $_GET['marca'] !== '') {
+        $filterConditions[] = "productos.marca_id = " . intval($_GET['marca']);
+    }
+
+    if (count($filterConditions) > 0) {
+        $filterQuery = "WHERE " . implode(" AND ", $filterConditions);
+    }
+}
+
+$query = "SELECT productos.id, productos.titulo, productos.precio, productos.precio_original, productos.calificacion, productos.imagen_url AS thumbnail,
+                 categorias.nombre AS categoria, generos.nombre AS genero, marcas.nombre AS marca
+          FROM productos
+          INNER JOIN categorias ON productos.categoria_id = categorias.id
+          INNER JOIN generos ON productos.genero_id = generos.id
+          INNER JOIN marcas ON productos.marca_id = marcas.id
+          $filterQuery";
+$stmt = $pdo->query($query);
+$productos = $stmt->fetchAll(PDO::FETCH_ASSOC);
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -13,146 +63,75 @@
 </head>
 
 <body>
-
-    <!-- NAVBAR -->
-    <!-- <div id="navbar"></div> -->
     <?php include 'navbar.php'; ?>
 
     <div class="container-fluid py-4" id="tienda">
-        <!-- <div class="d-flex py-2 align-items-center">
-            <div class="form-outline me-3" data-mdb-input-init>
-                <input type="search" id="form1" class="form-control" placeholder="Buscar" aria-label="Search" />
-            </div>
-
-            <span class="mx-4">Mostrar todos los productos (número)</span>
-            <span class="mx-4">Ordenar</span>
-        </div> -->
-
         <div class="row">
             <div class="col-2 col-sm-3 col-md-2 slide-in">
                 <div class="container-fluid container">
-
-                    <!-- Categorías -->
-                    <form id="categories-form" class="py-1">
-
-                        <div class="d-flex py-2 justify-content-between align-items-center">
-                            <h5 class="mb-1 font-weight-bold">Categorías</h5>
-                            <i class="fa-solid fa-chevron-down"></i>
+                    <!-- Formulario de filtros dinámicos -->
+                    <form id="filters-form" class="py-1">
+                        <div class="form-group">
+                            <label for="categoria">Categoría</label>
+                            <select name="categoria" id="categoria" class="form-control">
+                                <option value="">Todas</option>
+                                <?php foreach ($categorias as $categoria): ?>
+                                    <option value="<?= htmlspecialchars($categoria['id']) ?>" <?= (isset($_GET['categoria']) && $_GET['categoria'] == $categoria['id']) ? 'selected' : '' ?>>
+                                        <?= htmlspecialchars($categoria['nombre']) ?>
+                                    </option>
+                                <?php endforeach; ?>
+                            </select>
                         </div>
-
-                        <div class="form-check">
-                            <label class="tick" style="margin-bottom: 0.2rem;">
-                                <input class="form-check-input category-filter-check" type="checkbox" value=""
-                                    id="category-check" data-category="Deportivos">
-                                <span class="check">Deportivos</span>
-                            </label>
+                        <div class="form-group">
+                            <label for="genero">Género</label>
+                            <select name="genero" id="genero" class="form-control">
+                                <option value="">Todos</option>
+                                <?php foreach ($generos as $genero): ?>
+                                    <option value="<?= htmlspecialchars($genero['id']) ?>" <?= (isset($_GET['genero']) && $_GET['genero'] == $genero['id']) ? 'selected' : '' ?>>
+                                        <?= htmlspecialchars($genero['nombre']) ?>
+                                    </option>
+                                <?php endforeach; ?>
+                            </select>
                         </div>
-                        <div class="form-check">
-                            <label class="tick" style="margin-bottom: 0.2rem;">
-                                <input class="form-check-input category-filter-check" type="checkbox" value=""
-                                    id="category-check" data-category="Casuales">
-                                <span class="check">Casuales</span>
-                            </label>
-                        </div>
-                        <div class="form-check">
-                            <label class="tick" style="margin-bottom: 0.2rem;">
-                                <input class="form-check-input category-filter-check" type="checkbox" value=""
-                                    id="category-check" data-category="Formal">
-                                <span class="check">Formal</span>
-                            </label>
-                        </div>
-                        <div class="form-check">
-                            <label class="tick" style="margin-bottom: 0.2rem;">
-                                <input class="form-check-input category-filter-check" type="checkbox" value=""
-                                    id="category-check" data-category="Botas">
-                                <span class="check">Botas</span>
-                            </label>
+                        <div class="form-group">
+                            <label for="marca">Marca</label>
+                            <select name="marca" id="marca" class="form-control">
+                                <option value="">Todas</option>
+                                <?php foreach ($marcas as $marca): ?>
+                                    <option value="<?= htmlspecialchars($marca['id']) ?>" <?= (isset($_GET['marca']) && $_GET['marca'] == $marca['id']) ? 'selected' : '' ?>>
+                                        <?= htmlspecialchars($marca['nombre']) ?>
+                                    </option>
+                                <?php endforeach; ?>
+                            </select>
                         </div>
                     </form>
-
-                    <!-- Género -->
-                    <form id="genders-form" class="py-1">
-
-                        <div class="d-flex py-2 justify-content-between align-items-center">
-                            <h5 class="mb-1 font-weight-bold">Género</h5>
-                            <i class="fa-solid fa-chevron-down"></i>
-                        </div>
-
-                        <div class="form-check">
-                            <label class="tick" style="margin-bottom: 0.2rem;">
-                                <input class="form-check-input gender-filter-check" type="checkbox" value=""
-                                    id="gender-check" data-gender="Hombres">
-                                <span class="check">Hombres</span>
-                            </label>
-                        </div>
-                        <div class="form-check">
-                            <label class="tick" style="margin-bottom: 0.2rem;">
-                                <input class="form-check-input gender-filter-check" type="checkbox" value=""
-                                    id="gender-check" data-gender="Mujeres">
-                                <span class="check">Mujeres</span>
-                            </label>
-                        </div>
-                        <div class="form-check">
-                            <label class="tick" style="margin-bottom: 0.2rem;">
-                                <input class="form-check-input gender-filter-check" type="checkbox" value=""
-                                    id="gender-check" data-gender="Unisex">
-                                <span class="check">Unisex</span>
-                            </label>
-                        </div>
-                    </form>
-
-                    <!-- Marcas -->
-                    <form id="brands-form" class="py-1">
-
-                        <div class="d-flex py-2 justify-content-between align-items-center">
-                            <h5 class="mb-1 font-weight-bold">Marcas</h5>
-                            <i class="fa-solid fa-chevron-down"></i>
-                        </div>
-
-                        <div class="form-check">
-                            <label class="tick" style="margin-bottom: 0.2rem;">
-                                <input class="form-check-input brand-filter-check" type="checkbox" value=""
-                                    id="brand-check" data-brand="Nike">
-                                <span class="check">Nike</span>
-                            </label>
-                        </div>
-                        <div class="form-check">
-                            <label class="tick" style="margin-bottom: 0.2rem;">
-                                <input class="form-check-input brand-filter-check" type="checkbox" value=""
-                                    id="brand-check" data-brand="Adidas">
-                                <span class="check">Adidas</span>
-                            </label>
-                        </div>
-                        <div class="form-check">
-                            <label class="tick" style="margin-bottom: 0.2rem;">
-                                <input class="form-check-input brand-filter-check" type="checkbox" value=""
-                                    id="brand-check" data-brand="Puma">
-                                <span class="check">Puma</span>
-                            </label>
-                        </div>
-                        <div class="form-check">
-                            <label class="tick" style="margin-bottom: 0.2rem;">
-                                <input class="form-check-input brand-filter-check" type="checkbox" value=""
-                                    id="brand-check" data-brand="Reebok">
-                                <span class="check">Reebok</span>
-                            </label>
-                        </div>
-                        <div class="form-check">
-                            <label class="tick" style="margin-bottom: 0.2rem;">
-                                <input class="form-check-input brand-filter-check" type="checkbox" value=""
-                                    id="brand-check" data-brand="Vans">
-                                <span class="check">Vans</span>
-                            </label>
-                        </div>
-                    </form>
-
                 </div>
             </div>
             <div class="col-10 col-sm-9 col-md-10">
                 <div class="container-fluid">
                     <div class="card-body">
                         <div class="row fade-in" id="display-items-div">
-
+                            <?php foreach ($productos as $producto): ?>
+                                <?php
+                                $descuento = round((($producto['precio_original'] - $producto['precio']) / $producto['precio_original']) * 100);
+                                $estrellas = str_repeat('<span class="fa fa-star checked"></span>', $producto['calificacion']) .
+                                    str_repeat('<span class="fa fa-star"></span>', 5 - $producto['calificacion']);
+                                ?>
+                                <div class="col-12 col-md-4 mb-4">
+                                    <div class="card" style="height: 100%;">
+                                        <img src="<?= htmlspecialchars($producto['thumbnail']) ?>" class="card-img-top img-fluid" alt="<?= htmlspecialchars($producto['titulo']) ?>">
+                                        <div class="card-body">
+                                            <h5 class="card-title"><?= htmlspecialchars($producto['titulo']) ?></h5>
+                                            <div class="card-text"><?= $estrellas ?></div>
+                                            <p class="card-text">
+                                                <span class="font-weight-bold">$<?= number_format($producto['precio'], 2) ?></span>
+                                                <span class="text-muted" style="text-decoration: line-through;">$<?= number_format($producto['precio_original'], 2) ?></span>
+                                                <span class="text-danger">(<?= $descuento ?>% off)</span>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            <?php endforeach; ?>
                         </div>
                     </div>
                 </div>
@@ -161,7 +140,6 @@
         </div>
     </div>
 
-    <!-- FOOTER -->
     <?php include 'footer.php'; ?>
 
     <script src="js/navbar-es.js"></script>
@@ -169,7 +147,42 @@
     <script src="https://unpkg.com/@popperjs/core@2"></script>
     <script src="js/jquery-3.7.1.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
-    <script src="js/tienda.js"></script>
+
+    <!-- Script para manejar los filtros con AJAX -->
+    <script>
+        $(document).ready(function() {
+            $('#filters-form select').change(function() {
+                $.ajax({
+                    url: 'tienda.php',
+                    type: 'GET',
+                    data: $('#filters-form').serialize(),
+                    success: function(response) {
+                        // Actualizar el contenido con la respuesta del servidor
+                        $('#display-items-div').html($(response).find('#display-items-div').html());
+                        // Mantener los filtros seleccionados
+                        $('#filters-form').find('select').each(function() {
+                            $(this).val($(response).find('select[name="' + $(this).attr('name') + '"]').val());
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+
+    <script>
+        $(document).ready(function() {
+            // Agregar la clase visible para los elementos con la clase fade-in
+            $(".fade-in").each(function(i) {
+                var element = $(this);
+                setTimeout(function() {
+                    element.addClass("visible");
+                }, 200 * i); // Retraso escalonado para cada elemento
+            });
+
+            // Agregar la clase visible para la barra lateral
+            $(".slide-in").addClass("visible");
+        });
+    </script>
 </body>
 
 </html>
