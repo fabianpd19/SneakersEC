@@ -1,7 +1,7 @@
 <?php
-// Verifica si la sesión no ha sido iniciada antes de llamar a session_start()
+
 if (session_status() === PHP_SESSION_NONE) {
-    session_start(); // Iniciar sesión solo si aún no ha sido iniciada
+    session_start();
 }
 ?>
 

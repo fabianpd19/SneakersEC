@@ -1,10 +1,9 @@
 <?php
-// Incluir el archivo de conexión
+
 require 'backend/config/connection.php';
 
-session_start(); // Iniciar sesión
+session_start();
 
-// Redirigir al usuario a su perfil si ya ha iniciado sesión
 if (isset($_SESSION['user_id'])) {
     header('Location: perfil-usuario.php');
     exit();

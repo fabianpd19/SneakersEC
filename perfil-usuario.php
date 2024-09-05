@@ -1,10 +1,10 @@
 <?php
-// Incluir el archivo de conexión
+
 require 'backend/config/connection.php';
 
-session_start(); // Iniciar sesión
+session_start();
 
-// Verificar si el usuario está autenticado
+
 if (!isset($_SESSION['user_id'])) {
     header('Location: login.php');
     exit();
