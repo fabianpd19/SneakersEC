@@ -36,8 +36,8 @@ if (session_status() === PHP_SESSION_NONE) {
                             <i class="fa-solid fa-user"></i> <?php echo htmlspecialchars($_SESSION['username']); ?>
                         </a>
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="perfil-usuario.php">Perfil</a>
-                            <a class="dropdown-item" href="backend/logout.php">Cerrar Sesión</a>
+                            <a class="dropdown-item" href="perfil-usuario.php">Profile</a>
+                            <a class="dropdown-item" href="backend/logout.php">Logout</a>
                         </div>
                     </li>
                 <?php else: ?>

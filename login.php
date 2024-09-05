@@ -24,7 +24,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
         // Verificar si se encontró el usuario y la contraseña es correcta
-        if ($user && md5($password, $user['password'])) {
+        if ($user && md5($password) === $user['password']) {
             // Iniciar sesión exitosa: almacenar la información en la sesión
             $_SESSION['user_id'] = $user['id'];
             $_SESSION['username'] = $user['username'];
