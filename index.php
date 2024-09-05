@@ -127,7 +127,7 @@
             <div class="col-12 col-sm-12">
                 <h1 class="font-weight-bold text-center display-3">NEW THIS WEEK</h1>
                 <div class="text-center">
-                    <a href="tienda.html" type="button" class="custom-btn btn btn-dark" href="tienda.html">Shop
+                    <a href="tienda.php" type="button" class="custom-btn btn btn-dark">Shop
                         New Arrivals</a>
                 </div>
             </div>
