@@ -121,15 +121,17 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['save_changes'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Perfil de Usuario - SneakersEC</title>
-    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <title>SneakersEC</title>
+    <link rel="stylesheet" href="css/bootstrap-grid.css">
+    <link rel="stylesheet" href="css/bootstrap.css">
     <link rel="stylesheet" href="css/styles.css">
+    <link rel="shortcut icon" href="img/favicon/image.png" type="image/x-icon">
+    <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'>
 </head>
 
 <body>
 
     <!-- NAVBAR -->
-    <!-- <div id="navbar"></div> -->
     <?php include 'navbar.php'; ?>
 
     <div id="user-profile" class="container py-4 fade-in">
