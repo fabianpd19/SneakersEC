@@ -63,6 +63,55 @@ $foto_url = htmlspecialchars($user['foto_url'] ?? 'https://bootdey.com/img/Conte
 $direccion = htmlspecialchars($user['direccion'] ?? 'No disponible');
 $sobre = htmlspecialchars($user['sobre'] ?? 'No disponible');
 $hobbies = htmlspecialchars($user['hobbies'] ?? 'No disponible');
+
+// Verificar si se ha enviado el formulario de edición
+if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['save_changes'])) {
+    // Obtener los datos del formulario
+    $username = $_POST['username'];
+    $email = $_POST['email'];
+    $phone = $_POST['phone'];
+    $website = $_POST['website'];
+    $about = $_POST['about'];
+
+    // Validar y sanitizar los datos (deberías añadir validaciones adicionales)
+    $username = htmlspecialchars(trim($username));
+    $email = htmlspecialchars(trim($email));
+    $phone = htmlspecialchars(trim($phone));
+    $website = htmlspecialchars(trim($website));
+    $about = htmlspecialchars(trim($about));
+
+    // Obtener el ID del usuario
+    $user_id = $_SESSION['user_id'];
+
+    // Preparar la consulta de actualización
+    $sql_update = 'UPDATE usuarios SET username = :username, email = :email, phone = :phone, website = :website, about = :about WHERE id = :id';
+    $stmt_update = $pdo->prepare($sql_update);
+    $stmt_update->bindParam(':username', $username, PDO::PARAM_STR);
+    $stmt_update->bindParam(':email', $email, PDO::PARAM_STR);
+    $stmt_update->bindParam(':phone', $phone, PDO::PARAM_STR);
+    $stmt_update->bindParam(':website', $website, PDO::PARAM_STR);
+    $stmt_update->bindParam(':about', $about, PDO::PARAM_STR);
+    $stmt_update->bindParam(':id', $user_id, PDO::PARAM_INT);
+
+    // Ejecutar la actualización
+    if ($stmt_update->execute()) {
+        $alertMessage = '<div class="alert alert-success alert-dismissible fade show" role="alert">
+                            Información actualizada correctamente.
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                         </div>';
+    } else {
+        $alertMessage = '<div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            Error al actualizar la información.
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                         </div>';
+    }
+}
+
+
 ?>
 
 <!DOCTYPE html>
@@ -83,6 +132,7 @@ $hobbies = htmlspecialchars($user['hobbies'] ?? 'No disponible');
     <?php include 'navbar.php'; ?>
 
     <div id="user-profile" class="container py-4 fade-in">
+        <?php echo $alertMessage; ?>
         <div class="row">
             <div class="col-lg-4">
                 <div class="profile-card-4 z-depth-3">
@@ -243,44 +293,45 @@ $hobbies = htmlspecialchars($user['hobbies'] ?? 'No disponible');
 
 
                             <div class="tab-pane" id="edit">
-                                <form>
+                                <form action="perfil-usuario.php" method="POST"> <!-- Agrega el atributo action y method -->
                                     <div class="form-group row">
                                         <label class="col-lg-3 col-form-label form-control-label">Name</label>
                                         <div class="col-lg-9">
-                                            <input class="form-control" type="text" value="<?php echo $username; ?>">
+                                            <input class="form-control" type="text" name="username" value="<?php echo $username; ?>">
                                         </div>
                                     </div>
                                     <div class="form-group row">
                                         <label class="col-lg-3 col-form-label form-control-label">Email</label>
                                         <div class="col-lg-9">
-                                            <input class="form-control" type="email" value="<?php echo $email; ?>">
+                                            <input class="form-control" type="email" name="email" value="<?php echo $email; ?>">
                                         </div>
                                     </div>
                                     <div class="form-group row">
                                         <label class="col-lg-3 col-form-label form-control-label">Phone</label>
                                         <div class="col-lg-9">
-                                            <input class="form-control" type="text" value="<?php echo $phone; ?>">
+                                            <input class="form-control" type="text" name="phone" value="<?php echo $phone; ?>">
                                         </div>
                                     </div>
                                     <div class="form-group row">
                                         <label class="col-lg-3 col-form-label form-control-label">Website</label>
                                         <div class="col-lg-9">
-                                            <input class="form-control" type="text" value="<?php echo $website; ?>">
+                                            <input class="form-control" type="text" name="website" value="<?php echo $website; ?>">
                                         </div>
                                     </div>
                                     <div class="form-group row">
                                         <label class="col-lg-3 col-form-label form-control-label">About</label>
                                         <div class="col-lg-9">
-                                            <textarea class="form-control" rows="5"><?php echo $about; ?></textarea>
+                                            <textarea class="form-control" name="about" rows="5"><?php echo $about; ?></textarea>
                                         </div>
                                     </div>
                                     <div class="form-group row">
                                         <div class="col-lg-9 offset-lg-3">
-                                            <button class="btn btn-primary" type="submit">Save Changes</button>
+                                            <button class="btn btn-primary" type="submit" name="save_changes">Save Changes</button>
                                         </div>
                                     </div>
                                 </form>
                             </div>
+
                         </div>
                     </div>
                 </div>
