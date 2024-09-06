@@ -29,7 +29,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 
     // Hashear la contraseña
-    $hashed_password = md5($password); // Considera usar bcrypt para mayor seguridad
+    $hashed_password = md5($password);
 
     try {
         // Insertar datos en la tabla usuarios
